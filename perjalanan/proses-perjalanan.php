@@ -60,7 +60,7 @@
             echo '<p><a href="input-perjalanan.php" class="button">kembali</a></p>';
             die();
         };
-
+        echo '<p><a href="input-perjalanan.php" class="button">kembali</a></p>';
         // menyimpan data ke dalam file
         
         $record = $tanggal .":". $bulan .":". $tahun .":". $jarak .":". $makanPagi .":". 

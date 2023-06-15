@@ -9,3 +9,5 @@
 1:januari:2020:3:ya:ya:ya:ya
 1:januari:2020:3:ya:ya:ya:ya
 1:januari:2020:3:ya:ya:ya:ya
+1:januari:2020:5:tidak:tidak:tidak:tidak
+1:januari:2020:99:tidak:tidak:tidak:tidak

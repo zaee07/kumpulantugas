@@ -59,7 +59,7 @@ a:hover {
         <table>
             <tr>
                 <td>
-                    <label for="tanggal">Tanggal &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;: </label>
+                    <label for="tanggal">Tanggal</label>
                 </td>
                 <td>
                     <select name="tanggal" id="tanggal">
@@ -94,7 +94,7 @@ a:hover {
             </tr>
             <tr>
                 <td>
-                    <label for="jarak">Jarak &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;: </label>
+                    <label for="jarak">Jarak</label>
                 </td>
                 <td>
                     <input type="text" name="jarak" id="jarak">Km
@@ -102,45 +102,45 @@ a:hover {
             </tr>
             <tr>
                 <td>
-                    <label for="makan-pagi">Termasuk Makan Pagi &emsp;&emsp; : </label>
+                    <label for="makan-pagi">Termasuk Makan Pagi?</label>
                 </td>
                 <td>
                     <input type="radio" name="makan-pagi" id="ya-mp" value="ya">
                     <label for="ya-mp">Ya</label>
-                    <input type="radio" name="makan-pagi" id="tidak-mp" value="tidak">
+                    <input type="radio" name="makan-pagi" id="tidak-mp" value="tidak" checked>
                     <label for="tidak-mp">Tidak</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="makan-siang">Termasuk Makan Siang&emsp;&emsp;: </label>
+                    <label for="makan-siang">Termasuk Makan Siang?</label>
                 </td>
                 <td>
                     <input type="radio" name="makan-siang" id="ya-ms" value="ya">
                     <label for="ya-ms">Ya</label>
-                    <input type="radio" name="makan-siang" id="" value="tidak">
+                    <input type="radio" name="makan-siang" id="" value="tidak" checked>
                     <label for="tidak-ms">Tidak</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="makan-malam">Termasuk Makan Malam&emsp;&emsp;: </label>
+                    <label for="makan-malam">Termasuk Makan Malam?</label>
                 </td>
                 <td>
                     <input type="radio" name="makan-malam" id="ya-mm" value="ya">
                     <label for="ya-mm">Ya</label>
-                    <input type="radio" name="makan-malam" id="tidak-mm" value="tidak">
+                    <input type="radio" name="makan-malam" id="tidak-mm" value="tidak" checked>
                     <label for="tidak-mm">Tidak</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="inap">Termasuk menginap di hotel : </label>
+                    <label for="inap">Termasuk menginap di hotel?</label>
                 </td>
                 <td>
                     <input type="radio" name="inap" id="ya-inap" value="ya">
                     <label for="ya-inap">Ya</label>
-                    <input type="radio" name="inap" id="tidak-inap" value="tidak">
+                    <input type="radio" name="inap" id="tidak-inap" value="tidak" checked>
                     <label for="tidak-inap">Tidak</label>
                 </td>
             </tr>
