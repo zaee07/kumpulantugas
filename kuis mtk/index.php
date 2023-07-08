@@ -26,8 +26,19 @@ session_start();
             // sedang bermain
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // cek jawaban
+                if($_SESSION['math'] == '+' ) {
+                    $benar = $_SESSION['angka 1'] + $_SESSION['angka 2'];
+                } elseif($_SESSION['math'] == '-' ) {
+                    $benar = $_SESSION['angka 1'] - $_SESSION['angka 2'];
+
+                } elseif($_SESSION['math'] == 'x' ) {
+                    $benar = $_SESSION['angka 1'] * $_SESSION['angka 2'];
+                } else {
+                    $benar = $_SESSION['angka 1'] / $_SESSION['angka 2'];
+                }
+
                 $jawaban = $_POST['jawaban'];
-                $jawabanBenar = $_SESSION['angka 1'] + $_SESSION['angka 2'];
+                $jawabanBenar = round($benar, 1);
 
                 if($jawaban == $jawabanBenar) {
                     // benar
@@ -56,10 +67,23 @@ session_start();
         <?php
         $angka1 = rand(1, 100);
         $angka2 = rand(1, 100);
+        $math = rand(1,4);
         $_SESSION['angka 1'] = $angka1;
         $_SESSION['angka 2'] = $angka2;
+        $_SESSION['math'] = $math;
+
+        if($_SESSION['math'] == 1 ) {
+            $_SESSION['math'] = '+';
+        } elseif($_SESSION['math'] == 2 ) {
+            $_SESSION['math'] = '-';
+        } elseif($_SESSION['math'] == 3) {
+            $_SESSION['math'] = 'x';
+        } else {
+            $_SESSION['math'] = ':';
+        }
+
         ?>
-        <label for="soal"><?= $angka1; ?> + <?= $angka2; ?> = <input type="text" name="jawaban" id="soal"> </label>
+        <label for="soal"> <?= $angka1 .' '. $_SESSION['math'] .' '. $angka2;?> = <input type="text" name="jawaban" id="soal" autofocus> </label>
         <input type="submit" value="Jawab" class="button">
     </form>
     <p><a href="index.php?keluar">Keluar Kuis !</a></p>
