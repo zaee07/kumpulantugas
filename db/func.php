@@ -23,24 +23,21 @@ $db = 'siska_dasprog';
 
 $conn = mysqli_connect($server, $username, $pwd, $db);
 
-function cari() {
-    global $conn;
-    // Menerima filter yang dikirimkan dari formulir
-$prodi = $_POST['prodi'];
+function cari($keyword, $prodi) {
 
-// Menyusun pernyataan SQL SELECT dengan kondisi filter
-if (!empty($prodi)) {
-    // $sql = "SELECT * FROM nama_tabel WHERE kategori = '$prodi'";
-    $sql = "SELECT DISTINCT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
-        FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_prodi = '$prodi'";
-} else {
-    $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
-        FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn";
-}
-
-// Menjalankan pernyataan SQL dan mengambil hasilnya
-$result = mysqli_query($conn, $sql);
-// return $result;
-var_dump($result);
+    if ( !empty($prodi) && !empty($keyword) ) {
+        $query = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
+            FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_prodi = '$prodi' AND nama_lengkap LIKE '%$keyword%' OR nim LIKE '%$keyword%'";
+    } elseif( !empty($prodi) ) {
+        $query = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
+            FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_prodi = '$prodi'";
+    } elseif( !empty($keyword) ) {
+        $query = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
+            FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_lengkap LIKE '%$keyword%' OR nim LIKE '%$keyword%'";
+    } else {
+        $query = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
+            FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn";
+    }
+    return $query;
 }
 ?>

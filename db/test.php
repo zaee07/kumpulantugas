@@ -11,39 +11,34 @@ $sql = "SELECT DISTINCT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, 
         FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn";
 $result = mysqli_query($conn, $sql);
 
-//$row= mysqli_fetch_assoc($result);var_dump($row);die;
-// var_dump( $_POST["cari"]);
-
-// if( isset( $_POST["cari"] ) ) {
-//     $search = $_POST["cari"];
-//     mysqli_query(cari($search));
-//     die;
-// };
-if(isset($_POST["cari"])) {
-    $prodi = $_POST['prodi'];
-    $keyword = $_POST['keyword'];
-
-    if ( !empty($prodi) && !empty($keyword) ) {
-        $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
-            FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_prodi = '$prodi' AND nama_lengkap LIKE '%$keyword%' OR nim LIKE '%$keyword%'";
-    } elseif( !empty($prodi) ) {
-        $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
-            FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_prodi = '$prodi'";
-    } elseif( !empty($keyword) ) {
-        $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
-            FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_lengkap LIKE '%$keyword%' OR nim LIKE '%$keyword%'";
-    } else {
-        $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
-            FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn";
-    }
+// # test function cari
+if( isset($_POST["cari"])) {
+    $mhs= cari($_POST["keyword"], $_POST["prodi"]);var_dump($mhs);
+    $result = mysqli_query($conn, $mhs);
 }
-$result = mysqli_query($conn, $sql);
-// var_dump($result);
+
+// if(isset($_POST["cari"])) {
+//     $prodi = $_POST['prodi'];
+//     $keyword = $_POST['keyword'];
+
+//     if ( !empty($prodi) && !empty($keyword) ) {
+//         $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
+//             FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_prodi = '$prodi' AND nama_lengkap LIKE '%$keyword%' OR nim LIKE '%$keyword%'";
+//     } elseif( !empty($prodi) ) {
+//         $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
+//             FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_prodi = '$prodi'";
+//     } elseif( !empty($keyword) ) {
+//         $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
+//             FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn WHERE nama_lengkap LIKE '%$keyword%' OR nim LIKE '%$keyword%'";
+//     } else {
+//         $sql = "SELECT nim, nama_lengkap, mahasiswa.alamat, mahasiswa.no_telp, tgl_lahir, nama_prodi, nama_dosen
+//             FROM(mahasiswa JOIN prodi ON prodi_id=id_prodi) JOIN dosen ON dosen_pa_nidn=nidn";
+//     }
+// }
+
 
 if(mysqli_fetch_assoc($result) == 0) {
-    // echo "record tidak ada.";
-    echo "<script>alert('record tidak ada')</script>";
-    header('Location: test.php');
+    echo "<p>Record data tidak ditemukan <a href='mahasiswa-basisdata.php'>kembali ke dashboard</a></p>";
 } else 
 {
 
@@ -53,7 +48,7 @@ if(mysqli_fetch_assoc($result) == 0) {
 <form action="" method="post">
     <input type="text" name="keyword" id="keyword" autofocus placeholder="ketikan nama/nim" autocomplete="off" class="input">
     <select name="prodi" id="prodi" class="input">
-        <option value="" selected hidden>Semua</option>
+        <option value="">Semua</option>
         <option value="Sistem Informasi">Sistem Informasi</option>
         <option value="Agri Bisnis">Agri Bisnis</option>
         <option value="PGSD">PGSD</option>
